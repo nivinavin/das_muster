@@ -1,0 +1,44 @@
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content">
+  <div class="container">
+    <div class="card" style="width: 50rem; margin-top: 5%;border-top-left-radius: 100%; margin-left: auto; margin-right: auto;">
+      <img src="../../../assets/image/images.png" class="card-img-top" alt="..." style="height: 10rem; width: 10rem;margin-bottom: 15%;">
+      <div class="card-body" style="display: block; margin-left: auto; margin-right: auto;">
+        <h5 class="card-title" style="font-family: 'Trebuchet MS', sans-serif;font-size: 2rem; font-stretch: semi-condensed; letter-spacing: 3px;">USER LOGIN</h5>
+        <small *ngIf="isLoggedIn" style="color: red;">
+          {{loggedIn}}
+        </small><br>
+        <form [formGroup]="loginDetailsForm" (ngSubmit)="onLogin()" style="width: 28rem;">
+        <div class="form-group">
+          <label for="exampleInputEmail1" style="margin-left: -50%;">Enter Your Email Address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="email"
+            [class.is-invalid]="submitted && loginDetailsForm.get('email').invalid && loginDetailsForm.get('email').touched"
+            formControlName="email" (mouseover)="speakIt('Enter Your Email Address')">
+        </div>
+        <div
+          *ngIf="(loginDetailsForm.get('email').invalid && loginDetailsForm.get('email').touched) || loginDetailsForm.get('email').dirty">
+          <small class="text-danger" *ngIf="loginDetailsForm.get('email').errors?.required">Email address is
+            required</small>
+          <small class="text-danger" *ngIf="loginDetailsForm.get('email').errors?.pattern">Email address is
+            invalid</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" style="margin-left: -60%;">Enter Your Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password"
+            formControlName="password" (mouseover)="speakIt('Enter Your Password')">
+        </div>
+        <hr>
+        <div class="form-group row">&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-success button" style="padding: 12px;" ><i class="fas fa-sign-in-alt" (mouseover)="speakIt('Sign In Option         If you already filled your email and password click here to sign in')"></i> &nbsp; |
+            &nbsp;Sign In <img src="../../../assets/image/login.png" height="24px" width="24px" *ngIf="loadingCircle"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-warning button" (click)="onReset()" (mouseover)="speakIt('Reset Option      This will clear your INPUT Field')"><i class="fas fa-trash"></i> &nbsp; | &nbsp;Clear <img src="../../../assets/image/bean.png" height="24px" width="24px" *ngIf="loadingReset"></button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-info button" (click)="loginWithGoogle()" style="background-color: lightsalmon;" (mouseover)="speakIt('Google Login Option')"> <img src="../../../assets/image/googleicon.png" height="30px" width="30px" style="background-color: white;"> | &nbsp; Google Login <img src="../../../assets/image/login.gif" height="24px" width="24px" *ngIf="loadingGoogle"></button>
+        </div>
+        <a routerLink="/forgetPassword" (mouseover)="speakIt('Forget Password Option')">forget Password?</a>
+        </form>
+      </div>
+    </div>
+    </div>
+</div>
